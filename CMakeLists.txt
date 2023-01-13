@@ -43,6 +43,7 @@ OPTION(ENABLE_VECTORIZATION "Enable vectorization and further processor-related 
 OPTION(BUILD_PYTHON_INTERFACE "Build the python binding" ON)
 OPTION(BUILD_BENCHMARK "Build the benchmark" ON)
 OPTION(BUILD_EXAMPLES "Build the examples" ON)
+OPTION(BUILD_WITH_IPOPT "Build the IPOPT wrapper." ON)
 OPTION(GENERATE_PYTHON_STUBS "Generate the Python stubs associated to the Python library" OFF)
 
 IF(DEFINED BUILD_UNIT_TESTS)
@@ -76,7 +77,9 @@ IF(BUILD_EXAMPLES OR BUILD_TESTING OR BUILD_BENCHMARK)
 ELSE()
   ADD_OPTIONAL_DEPENDENCY(example-robot-data)
 ENDIF()
-ADD_OPTIONAL_DEPENDENCY(ipopt)
+IF(BUILD_WITH_IPOPT)
+  ADD_OPTIONAL_DEPENDENCY(ipopt)
+ENDIF()
 ADD_OPTIONAL_DEPENDENCY("scipy")
 
 OPTION(BUILD_WITH_CODEGEN_SUPPORT "Build the library with the Code Generation support (required CppADCodeGen)" OFF)
